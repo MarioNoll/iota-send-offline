@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- Step 1 - Prepare -->
+
+<div id="step1Div" class="ui raised container green segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">1</div>
+        </td>
+        <td>
+          <h2 class="ui header">Prepare Transaction
+            <div class="sub header">Generate and Save Information</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step1ribbon" class="ui green right ribbon label online">online</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="generateInfoErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error generating the information </div>
+    <p id="generateInfoErrMsg"></p>
+  </div>
+
+  <form id="step1InputForm" autocomplete="off" class="ui equal width form">
+    <div id="step1FromAddressFieldDiv" class="field">
+      <label class="formLabel" data-content="Address where your funds are stored. Do not confuse this with your seed." data-position="top left"
+        data-variation="mini">
+        <i class="question circle grey icon"></i>From Address
+      </label>
+
+      <div class="ui small action input">
+        <input id="inputStep1FromAddress" name="inputStep1FromAddress" class="trytes" type="text" maxlength="90">
+        <a id="btnExploreFromAddress" tabindex="-1" class="ui secondary right icon disabled button" target="_blank">
+          <i class="eye icon"></i>
+        </a>
+      </div>
+    </div>
+
+    <div id="btnGenInfo" class="ui secondary submit button">Generate Information</div>
+  </form>
+  <p></p>
+
+  <div id="infoContainer" class="ui container transition hidden">
+    <p></p>
+    <div class="ui equal width form">
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel" data-content="Current balance on address above." data-position="top left" data-variation="mini">
+            <i class="question circle grey link icon"></i>Balance
+          </label>
+
+          <div class="ui right labeled input">
+            <input id="inputGenBalance" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="inputGenBalanceTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="formLabel" data-content="Fee for the proxy which will therefore execute POW and reattach/promote your transaction if necessary."
+            data-position="top left" data-variation="mini">
+            <i class="question circle grey icon"></i>Fee
+          </label>
+
+          <div class="ui right labeled input">
+            <input id="inputGenFee" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="inputGenFeeTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="ui horizontal section divider header">
+        <i class="pencil alternate icon"></i>
+        Save Information
+      </h5>
+
+      <div class="field">
+        <label class="formLabel" data-content="Below information is required for the next step. Copy it to proceed." data-position="top left"
+          data-variation="mini">
+          <i class="question circle grey icon"></i>Information
+        </label>
+        <textarea id="textAreaStep1RawInformation" rows="5" class="readonly" readonly="readonly"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>
