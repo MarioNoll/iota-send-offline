@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Send IOTA Offline</title>
+
+  <!-- inject:head:vendor:css -->
+  <link rel="stylesheet" href="vendor/semantic/semantic.min.css">
+  <!-- endinject -->
+
+  <!-- inject:head:vendor:js -->
+  <script src="vendor/jquery/jquery-3.3.1.min.js" defer></script>
+  <script src="vendor/semantic/semantic.min.js" defer></script>
+  <script src="vendor/iota/iota.min.js" defer></script>
+  <!-- endinject -->
+
+  <!-- inject:head:app:js -->
+  <script src="app/js/app.min.js" defer></script>
+  <!-- endinject -->
+
+</head>
+
+<body>
+  <div class="ui main container">
+    <p></p>
+    <a id="faq" class="ui right corner label" style="position: fixed">
+      <i class="faq question icon"></i>
+    </a>
+    <h1 class="ui header pageTitle">Generate &amp; Send Offline Transaction</h1>
+    <div class="ui hidden divider"></div>
+
+    <!-- inject:modal -->
+    <!DOCTYPE html>
+<div id="confirmModal" class="ui modal">
+  <div class="ui header pageTitle">Transfer</div>
+
+  <div class="content">
+    <div id="confirmForm" class="ui equal width form">
+      <div class="field">
+        <label class="formLabel">From Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmFromAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmFromAddress" class="ui secondary right icon button" target="_blank">
+            <i class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="formLabel">To Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmToAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmToAddress" class="ui secondary right icon button" target="_blank">
+            <i id="iconExploreToAddress" class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="confirmRemainderAddressDiv" class="field transition hidden">
+        <label class="formLabel">Remainder Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmRemainderAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmRemainderAddress" class="ui secondary right icon button" target="_blank">
+            <i id="iconExploreRemainderAddress" class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel">Value</label>
+
+          <div class="ui right labeled input">
+            <input id="confirmValue" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="confirmValueTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="formLabel">Fee</label>
+
+          <div class="ui right labeled input">
+            <input id="confirmFee" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="confirmFeeTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="btnConfirmSubmit" class="ui primary submit button" autofocus>
+      <i class="check icon"></i>
+      Confirm
+    </button>
+
+    <button id="btnConfirmCancel" class="ui submit deny button">
+      <i class="close icon"></i>
+      Cancel
+    </button>
+  </div>
+</div>
+    <!DOCTYPE html>
+<div id="duplicateModal" class="ui small modal">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="exclamation circle orange icon"></i>
+    <p class="modalTitle">Transaction is already processing</p>
+  </div>
+  <div class="content">
+    <div class="ui equal width form">
+      <div class="field">
+        <label class="formLabel" data-tooltip="Once the proxy finished processing your transaction you can check the state with the bundle hash."
+          data-position="top left" data-variation="mini">
+          <i class="question circle grey icon"></i>Bundle Hash
+        </label>
+
+        <div class="ui small action input">
+          <input id="bundleHashDuplicate" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreBundleHashDuplicate" class="ui secondary right icon button" target="_blank">
+            <i class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!DOCTYPE html>
+<div id="faqModal" class="ui longer modal">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="question icon"></i>Help
+  </div>
+  <div class="content">
+    <div class="ui green horizontal label"> online </div>
+    <span>Steps marked with this label require an internet connection.</span>
+
+    <p></p>
+
+    <div class="ui orange horizontal label"> offline </div>
+    <span>For the best possible security it is advised to execute this step on an offline device.</span>
+
+    <div class="ui divider"></div>
+
+    <div class="ui accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why do i have to a pay fee?
+      </div>
+      <div class="content">
+        <p>Transactions on the iota network do not cost any fees, though in order to prevent the network from spam attacks a
+          computationally hard puzzle must be solved
+          <a href="https://iota.readme.io/docs/glossary#section-generic-terms" target="_blank">(PoW)</a>. Therefore your transaction will be sent to the network through a proxy.</p>
+
+        <p>The proxy will solve the puzzle and furthermore watch your transaction and perform
+          <a href="https://iota.readme.io/docs/transaction-reattachments" target="_blank">reattachments and promotions</a> if necessary until it gets confirmed. To provide this service a small fee must
+          be charged. </p>
+
+        <p>Using a proxy comes with the big advantage that you can now fire &amp; forget a transaction. The service itself will
+          make sure that your transaction gets included in the iota network.</p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why is my address balance empty although i only sent part of my balance?
+      </div>
+      <div class="content">
+        <p>Addresses in the iota network should
+          <a href="https://iota.readme.io/docs/seeds-private-keys-and-accounts#section-private-keys-and-addresses" target="_blank">
+            not be reused</a>. The remainder of a transaction will therefore be sent to a new address calculated from your
+          seed. This means your remaining funds on the new address are still under your full control and accessible with
+          your seed.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why does it take so long for me to create a transaction or doesn't even finish?
+      </div>
+      <div class="content">
+        <p>To sign a transaction with your seed the private key of your address has to be calculated. This is done deterministically
+          and will therefore take longer the more addresses you have been using. Address calculation can not finish if your
+          seed is incorrect.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Is this safe to use?
+      </div>
+      <div class="content">
+        <p>Code for this website is open source on
+          <a href="https://github.com/looploooop/iota-send-offline" target="_blank">github</a> making it possible for everyone to review. Though not required it is advised to complete step 2 on an
+          offline device, doing so ensures your seed is not compromised. Therefore just download the latest release from
+          github and transfer it to your offline device.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        What does private key reuse mean and why is it forbidden?
+      </div>
+      <div class="content">
+        <p>Private key reuse refers to multiple transfers from the same address. The more often you spent from an address the
+          less secure it gets. To protect your funds sending more than once from the same address is prohibited.
+          <a href="https://iota.readme.io/docs/seeds-private-keys-and-accounts#section-private-keys-and-addresses" target="_blank">Read more</a>
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Is it possible that i have to pay a fee even if my transaction does not get confirmed?
+      </div>
+      <div class="content">
+        <p>Transactions in iota are concatenated into a
+          <a href="https://iota.readme.io/docs/bundles#section-bundles" target="_blank">bundle</a>.
+          The fee as a single transaction is part of the bundle and can not be confirmed
+          independently. It is therefore not possible to keep the fee without confirming the bundle.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    <!DOCTYPE html>
+<div id="successModal" class="ui small modal">
+  <i class="close icon"></i>
+  <div class="ui icon header modalIconHeader">
+    <i class="check green icon"></i>
+    <p class="modalTitle">Success</p>
+  </div>
+
+  <div class="content">
+    <div class="ui equal width form">
+      <div class="field">
+        <label class="formLabel" data-tooltip="Once the proxy finished processing your transaction you can check the state with the bundle hash.">
+          <i class="question circle grey icon"></i>Bundle Hash
+        </label>
+
+        <div class="ui small action input">
+          <input id="bundleHashSuccess" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreBundleHashSuccess" class="ui secondary right icon button" target="_blank">
+            <i class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- endinject -->
+
+    <!-- inject:steps -->
+    <!DOCTYPE html>
+<!-- Step 1 - Prepare -->
+
+<div id="step1Div" class="ui raised container green segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">1</div>
+        </td>
+        <td>
+          <h2 class="ui header">Prepare Transaction
+            <div class="sub header">Generate and Save Information</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step1ribbon" class="ui green right ribbon label online">online</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="generateInfoErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error generating the information </div>
+    <p id="generateInfoErrMsg"></p>
+  </div>
+
+  <form id="step1InputForm" autocomplete="off" class="ui equal width form">
+    <div id="step1FromAddressFieldDiv" class="field">
+      <label class="formLabel" data-content="Address where your funds are stored. Do not confuse this with your seed." data-position="top left"
+        data-variation="mini">
+        <i class="question circle grey icon"></i>From Address
+      </label>
+
+      <div class="ui small action input">
+        <input id="inputStep1FromAddress" name="inputStep1FromAddress" class="trytes" type="text" maxlength="90">
+        <a id="btnExploreFromAddress" tabindex="-1" class="ui secondary right icon disabled button" target="_blank">
+          <i class="eye icon"></i>
+        </a>
+      </div>
+    </div>
+
+    <div id="btnGenInfo" class="ui secondary submit button">Generate Information</div>
+  </form>
+  <p></p>
+
+  <div id="infoContainer" class="ui container transition hidden">
+    <p></p>
+    <div class="ui equal width form">
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel" data-content="Current balance on address above." data-position="top left" data-variation="mini">
+            <i class="question circle grey link icon"></i>Balance
+          </label>
+
+          <div class="ui right labeled input">
+            <input id="inputGenBalance" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="inputGenBalanceTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="formLabel" data-content="Fee for the proxy which will therefore execute POW and reattach/promote your transaction if necessary."
+            data-position="top left" data-variation="mini">
+            <i class="question circle grey icon"></i>Fee
+          </label>
+
+          <div class="ui right labeled input">
+            <input id="inputGenFee" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="inputGenFeeTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="ui horizontal section divider header">
+        <i class="pencil alternate icon"></i>
+        Save Information
+      </h5>
+
+      <div class="field">
+        <label class="formLabel" data-content="Below information is required for the next step. Copy it to proceed." data-position="top left"
+          data-variation="mini">
+          <i class="question circle grey icon"></i>Information
+        </label>
+        <textarea id="textAreaStep1RawInformation" rows="5" class="readonly" readonly="readonly"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>
+    <!DOCTYPE html>
+<!-- Step 2 - Create -->
+<div id="step2Div" class="ui raised container orange segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">2</div>
+        </td>
+        <td>
+          <h2 class="ui header">Create Transaction
+            <div class="sub header">Insert Transaction Details and Sign</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step2ribbon" class="ui orange right ribbon label">
+            <i class="shield alternate icon"></i> offline
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="createTxErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error creating the transaction</div>
+    <p id="createTxErrMsg"></p>
+  </div>
+
+  <h5 class="ui horizontal section divider header stepDivider">
+    <i class="edit icon"></i> Step 1 Information
+  </h5>
+
+  <form id="step2InputForm" autocomplete="off" class="ui equal width form">
+    <div class="field">
+      <label class="formLabel" data-content="Paste information generated in step 1 here."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Information
+      </label>
+      <textarea id="textAreaStep2RawInformation" name="textAreaStep2RawInformation" rows="5" spellcheck="false"></textarea>
+    </div>
+
+    <div class="ui hidden divider"></div>
+    <div class="customDivider ui divider customDivider"></div>
+    <div class="ui hidden divider"></div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Amount you want to send. NOTE: If you do not send the maximum the remainder will be sent to the next address of your seed."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Value
+      </label>
+      <div class="ui labeled action fluid input">
+        <input id="inputValue" name="inputValue" class="inputValue" type="number" min="1">
+
+        <div id="dropDownValueUnit" class="ui secondary floating dropdown button valueDropdown">
+          <div class="text dropdownText">Mi</div>
+          <i class="dropdown icon dropdownIcon"></i>
+        </div>
+
+        <div id="btnValueMax" class="ui secondary button">Max</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Receiving address for your transaction."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>To Address
+      </label>
+      <div class="ui small fluid input">
+        <input id="inputToAddress" name="inputToAddress" type="text" class="trytes" spellcheck="false" maxlength="90">
+      </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Private seed to access your account. Keep it secret."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Seed
+      </label>
+      <div class="ui small right labeled fluid input">
+        <input id="inputSeed" name="inputSeed" type="text" class="trytes" spellcheck="false" maxlength="81">
+        <div id="seedChecksum" class="ui label checksum" data-content="Checksum of your seed."  data-position="top right" data-variation="mini">
+          ---
+        </div>
+      </div>
+    </div>
+
+    <div id="createTxWarning" class="small ui warning message">
+      <div class="content">
+        <div class="header"> Calculating Address Key Index</div>
+        <p id="createTxWarningMsg"></p>
+        <div id="createTxInfoBtns" class="tiny ui buttons">
+          <button id="createTxInfoBtnCancel" class="ui button cancel" type="button">Cancel</button>
+          <div class="or"></div>
+          <button id="createTxInfoBtnContinue" class="ui button continue" type="button">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="btnCreateTx" class="ui secondary submit button">Create Transaction</div>
+  </form>
+
+  <div class="ui hidden divider"></div>
+  
+  <div id="txContainer" class="ui container transition hidden">
+    <h5 class="ui horizontal section divider header">
+      <i class="pencil alternate icon"></i>
+      Save Signed Transaction
+    </h5>
+
+    <p></p>
+    <div class="ui equal width form">
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel" data-content="Transaction data in raw format."  data-position="top left" data-variation="mini">
+              <i class="question circle grey icon"></i>Raw Transaction
+          </label>
+          <textarea id="textAreaRawTransaction" tabindex="-1" class="readonly" readonly="readonly" rows="8" spellcheck="false"></textarea>
+        </div>
+        <div class="field">
+          <label class="formLabel" data-content="Copy the signed transaction to below to proceed with the next step."  data-position="top left" data-variation="mini">
+              <i class="question circle grey icon"></i>Signed Transaction
+          </label>
+          <textarea id="textAreaSignedTransaction" class="readonly" readonly="readonly" rows="8" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>
+    <!DOCTYPE html>
+<!-- Step 3 - Send -->
+<div id="step3Div" class="ui raised container green segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">3</div>
+        </td>
+        <td>
+          <h2 class="ui header">Send Transaction
+            <div class="sub header">Publish Transaction to IOTA Proxy</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step3ribbon" class="ui green right ribbon label online">online</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="sendTxErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error sending the transaction</div>
+    <p id="sendTxErrMsg"></p>
+  </div>
+
+  <h5 class="ui horizontal section divider header stepDivider">
+    <i class="edit icon"></i> Step 2 Signed Transaction
+  </h5>
+
+  <form id="step3InputForm" autocomplete="off" class="ui equal width form">
+
+    <div id="step3Input" class="field">
+      <label class="formLabel" data-content="Paste signed transaction from step 2 here." data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Signed Transaction
+      </label>
+      <textarea id="textAreaStep3SignedTransaction" name="textAreaStep3SignedTransaction" rows="8" spellcheck="false"></textarea>
+    </div>
+
+    <div id="btnSendTransaction" class="ui primary submit button">Send Transaction</div>
+  </form>
+</div>
+    <!-- endinject -->
+
+    <div class="ui hidden divider"></div>
+    <div id="footer" class="ui center aligned container transition hidden">
+      <i id="githubLink" class="big github link icon"></i>
+    </div>
+
+  </div>
+  <div class="ui hidden divider"></div>
+</body>
+
+</html>
