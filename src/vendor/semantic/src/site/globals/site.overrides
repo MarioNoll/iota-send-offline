@@ -1,0 +1,129 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+body {
+   background-color: #ab8b5b63;
+}
+
+.ui.table tr { border: 0px !important;}
+.ui.table tr td { border: 0px !important; }
+.ui.accordion .accordion .content, .ui.accordion .content { margin-left: 25px !important; }
+.ui.accordion { opacity: 0.9; }
+.content span { opacity: 0.9; }
+.ui.horizontal.section.divider.header { opacity: 0.5; }
+
+.customDivider.ui.divider:not(.vertical):not(.horizontal) {
+    border-top: 1px solid @dividerColor;
+}
+
+.ui.form .field.error .ui.dropdown .item {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+.ui.dropdown .menu {
+    border: 1px solid rgba(34,36,38,.15) !important;
+}
+
+.modalIconHeader {
+    color: rgba(0, 0,0,0.7) !important;
+}
+
+#confirmModal .ui.header,
+#duplicateModal .ui.header,
+#successModal .ui.header {
+    background-color: @confirmBgColor;
+    border-bottom: 1px solid @dividerColor;
+}
+
+#confirmModal .content,
+#duplicateModal .content,
+#successModal .content {
+    background-color: @confirmBgColor;
+}
+
+#confirmModal .actions,
+#duplicateModal .actions,
+#successModal .actions {
+    background-color: @confirmBgColor;
+    border-top: 1px solid @dividerColor;
+}
+
+#dropDownValueUnit .menu .active.item {
+    background-color: #ffffff !important;
+}
+
+.pageTitle { 
+    color: #271f14a3 !important; 
+}
+
+#confirmModal .pageTitle {
+    border-top: 0.1em solid @green !important;
+}
+
+.modalTitle {
+    opacity: 0.7;
+}
+
+.stepIndex {
+    opacity: 0.7;
+}
+
+.cancel { opacity: 0.7; }
+
+.continue { opacity: 0.9; }
+
+.transactionStep {
+    max-width: 900px;
+    min-width: 420px;
+}
+
+.checksum {
+    text-align: center;
+    vertical-align: middle;
+    width: 50px;
+    cursor: default;
+}
+
+.fiatTag {
+    display: flex !important;
+    align-items: center;
+}
+
+.readonly {
+    opacity: 0.7;
+}
+
+.trytes {
+    text-transform:uppercase;
+}
+
+.inputValue {
+    min-width: 100px;
+}
+
+.formLabel {
+    width: fit-content;
+}
+
+.headerRow {
+    opacity: 0.8;
+}
+
+.valueDropdown {
+    min-width: 60px;
+    width: 60px;
+    background: @secondaryColor !important;
+    color: #fff !important;
+}
+
+.dropdownIcon {
+    background: @secondaryColor !important;
+    color: #fff !important;
+}
+
+.dropdownText {
+    background: @secondaryColor !important;
+    color: #fff !important;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- Step 2 - Create -->
+<div id="step2Div" class="ui raised container orange segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">2</div>
+        </td>
+        <td>
+          <h2 class="ui header">Create Transaction
+            <div class="sub header">Insert Transaction Details and Sign</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step2ribbon" class="ui orange right ribbon label">
+            <i class="shield alternate icon"></i> offline
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="createTxErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error creating the transaction</div>
+    <p id="createTxErrMsg"></p>
+  </div>
+
+  <h5 class="ui horizontal section divider header stepDivider">
+    <i class="edit icon"></i> Step 1 Information
+  </h5>
+
+  <form id="step2InputForm" autocomplete="off" class="ui equal width form">
+    <div class="field">
+      <label class="formLabel" data-content="Paste information generated in step 1 here."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Information
+      </label>
+      <textarea id="textAreaStep2RawInformation" name="textAreaStep2RawInformation" rows="5" spellcheck="false"></textarea>
+    </div>
+
+    <div class="ui hidden divider"></div>
+    <div class="customDivider ui divider customDivider"></div>
+    <div class="ui hidden divider"></div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Amount you want to send. NOTE: If you do not send the maximum the remainder will be sent to the next address of your seed."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Value
+      </label>
+      <div class="ui labeled action fluid input">
+        <input id="inputValue" name="inputValue" class="inputValue" type="number" min="1">
+
+        <div id="dropDownValueUnit" class="ui secondary floating dropdown button valueDropdown">
+          <div class="text dropdownText">Mi</div>
+          <i class="dropdown icon dropdownIcon"></i>
+        </div>
+
+        <div id="btnValueMax" class="ui secondary button">Max</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Receiving address for your transaction."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>To Address
+      </label>
+      <div class="ui small fluid input">
+        <input id="inputToAddress" name="inputToAddress" type="text" class="trytes" spellcheck="false" maxlength="90">
+      </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="field">
+      <label class="formLabel" data-content="Private seed to access your account. Keep it secret."  data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Seed
+      </label>
+      <div class="ui small right labeled fluid input">
+        <input id="inputSeed" name="inputSeed" type="text" class="trytes" spellcheck="false" maxlength="81">
+        <div id="seedChecksum" class="ui label checksum" data-content="Checksum of your seed."  data-position="top right" data-variation="mini">
+          ---
+        </div>
+      </div>
+    </div>
+
+    <div id="createTxWarning" class="small ui warning message">
+      <div class="content">
+        <div class="header"> Calculating Address Key Index</div>
+        <p id="createTxWarningMsg"></p>
+        <div id="createTxInfoBtns" class="tiny ui buttons">
+          <button id="createTxInfoBtnCancel" class="ui button cancel" type="button">Cancel</button>
+          <div class="or"></div>
+          <button id="createTxInfoBtnContinue" class="ui button continue" type="button">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="btnCreateTx" class="ui secondary submit button">Create Transaction</div>
+  </form>
+
+  <div class="ui hidden divider"></div>
+  
+  <div id="txContainer" class="ui container transition hidden">
+    <h5 class="ui horizontal section divider header">
+      <i class="pencil alternate icon"></i>
+      Save Signed Transaction
+    </h5>
+
+    <p></p>
+    <div class="ui equal width form">
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel" data-content="Transaction data in raw format."  data-position="top left" data-variation="mini">
+              <i class="question circle grey icon"></i>Raw Transaction
+          </label>
+          <textarea id="textAreaRawTransaction" tabindex="-1" class="readonly" readonly="readonly" rows="8" spellcheck="false"></textarea>
+        </div>
+        <div class="field">
+          <label class="formLabel" data-content="Copy the signed transaction to below to proceed with the next step."  data-position="top left" data-variation="mini">
+              <i class="question circle grey icon"></i>Signed Transaction
+          </label>
+          <textarea id="textAreaSignedTransaction" class="readonly" readonly="readonly" rows="8" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>

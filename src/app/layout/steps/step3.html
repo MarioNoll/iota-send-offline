@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- Step 3 - Send -->
+<div id="step3Div" class="ui raised container green segment transactionStep transition hidden">
+  <table class="ui very basic celled unstackable table">
+    <tbody>
+      <tr class="headerRow">
+        <td class="collapsing stepIndex">
+          <div class="ui big grey circular label">3</div>
+        </td>
+        <td>
+          <h2 class="ui header">Send Transaction
+            <div class="sub header">Publish Transaction to IOTA Proxy</div>
+          </h2>
+        </td>
+        <td class="collapsing">
+          <a id="step3ribbon" class="ui green right ribbon label online">online</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="sendTxErr" class="ui negative hidden message">
+    <i class="close icon"></i>
+    <div class="header"> There was an error sending the transaction</div>
+    <p id="sendTxErrMsg"></p>
+  </div>
+
+  <h5 class="ui horizontal section divider header stepDivider">
+    <i class="edit icon"></i> Step 2 Signed Transaction
+  </h5>
+
+  <form id="step3InputForm" autocomplete="off" class="ui equal width form">
+
+    <div id="step3Input" class="field">
+      <label class="formLabel" data-content="Paste signed transaction from step 2 here." data-position="top left" data-variation="mini">
+        <i class="question circle grey icon"></i>Signed Transaction
+      </label>
+      <textarea id="textAreaStep3SignedTransaction" name="textAreaStep3SignedTransaction" rows="8" spellcheck="false"></textarea>
+    </div>
+
+    <div id="btnSendTransaction" class="ui primary submit button">Send Transaction</div>
+  </form>
+</div>

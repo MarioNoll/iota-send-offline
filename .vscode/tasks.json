@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "gulp_build_debug",
+            "type": "shell",
+            "command": "gulp build --debug",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<div id="faqModal" class="ui longer modal">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="question icon"></i>Help
+  </div>
+  <div class="content">
+    <div class="ui green horizontal label"> online </div>
+    <span>Steps marked with this label require an internet connection.</span>
+
+    <p></p>
+
+    <div class="ui orange horizontal label"> offline </div>
+    <span>For the best possible security it is advised to execute this step on an offline device.</span>
+
+    <div class="ui divider"></div>
+
+    <div class="ui accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why do i have to a pay fee?
+      </div>
+      <div class="content">
+        <p>Transactions on the iota network do not cost any fees, though in order to prevent the network from spam attacks a
+          computationally hard puzzle must be solved
+          <a href="https://iota.readme.io/docs/glossary#section-generic-terms" target="_blank">(PoW)</a>. Therefore your transaction will be sent to the network through a proxy.</p>
+
+        <p>The proxy will solve the puzzle and furthermore watch your transaction and perform
+          <a href="https://iota.readme.io/docs/transaction-reattachments" target="_blank">reattachments and promotions</a> if necessary until it gets confirmed. To provide this service a small fee must
+          be charged. </p>
+
+        <p>Using a proxy comes with the big advantage that you can now fire &amp; forget a transaction. The service itself will
+          make sure that your transaction gets included in the iota network.</p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why is my address balance empty although i only sent part of my balance?
+      </div>
+      <div class="content">
+        <p>Addresses in the iota network should
+          <a href="https://iota.readme.io/docs/seeds-private-keys-and-accounts#section-private-keys-and-addresses" target="_blank">
+            not be reused</a>. The remainder of a transaction will therefore be sent to a new address calculated from your
+          seed. This means your remaining funds on the new address are still under your full control and accessible with
+          your seed.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Why does it take so long for me to create a transaction or doesn't even finish?
+      </div>
+      <div class="content">
+        <p>To sign a transaction with your seed the private key of your address has to be calculated. This is done deterministically
+          and will therefore take longer the more addresses you have been using. Address calculation can not finish if your
+          seed is incorrect.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Is this safe to use?
+      </div>
+      <div class="content">
+        <p>Code for this website is open source on
+          <a href="https://github.com/looploooop/iota-send-offline" target="_blank">github</a> making it possible for everyone to review. Though not required it is advised to complete step 2 on an
+          offline device, doing so ensures your seed is not compromised. Therefore just download the latest release from
+          github and transfer it to your offline device.
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        What does private key reuse mean and why is it forbidden?
+      </div>
+      <div class="content">
+        <p>Private key reuse refers to multiple transfers from the same address. The more often you spent from an address the
+          less secure it gets. To protect your funds sending more than once from the same address is prohibited.
+          <a href="https://iota.readme.io/docs/seeds-private-keys-and-accounts#section-private-keys-and-addresses" target="_blank">Read more</a>
+        </p>
+      </div>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Is it possible that i have to pay a fee even if my transaction does not get confirmed?
+      </div>
+      <div class="content">
+        <p>Transactions in iota are concatenated into a
+          <a href="https://iota.readme.io/docs/bundles#section-bundles" target="_blank">bundle</a>.
+          The fee as a single transaction is part of the bundle and can not be confirmed
+          independently. It is therefore not possible to keep the fee without confirming the bundle.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

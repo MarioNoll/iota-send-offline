@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<div id="confirmModal" class="ui modal">
+  <div class="ui header pageTitle">Transfer</div>
+
+  <div class="content">
+    <div id="confirmForm" class="ui equal width form">
+      <div class="field">
+        <label class="formLabel">From Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmFromAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmFromAddress" class="ui secondary right icon button" target="_blank">
+            <i class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="formLabel">To Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmToAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmToAddress" class="ui secondary right icon button" target="_blank">
+            <i id="iconExploreToAddress" class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="confirmRemainderAddressDiv" class="field transition hidden">
+        <label class="formLabel">Remainder Address</label>
+
+        <div class="ui small action input">
+          <input id="confirmRemainderAddress" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreConfirmRemainderAddress" class="ui secondary right icon button" target="_blank">
+            <i id="iconExploreRemainderAddress" class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label class="formLabel">Value</label>
+
+          <div class="ui right labeled input">
+            <input id="confirmValue" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="confirmValueTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="formLabel">Fee</label>
+
+          <div class="ui right labeled input">
+            <input id="confirmFee" tabindex="-1" class="readonly" readonly="readonly" type="text">
+            <div id="confirmFeeTag" class="ui tag fiatTag label"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="btnConfirmSubmit" class="ui primary submit button" autofocus>
+      <i class="check icon"></i>
+      Confirm
+    </button>
+
+    <button id="btnConfirmCancel" class="ui submit deny button">
+      <i class="close icon"></i>
+      Cancel
+    </button>
+  </div>
+</div>

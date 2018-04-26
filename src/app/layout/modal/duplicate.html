@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<div id="duplicateModal" class="ui small modal">
+  <i class="close icon"></i>
+  <div class="ui icon header">
+    <i class="exclamation circle orange icon"></i>
+    <p class="modalTitle">Transaction is already processing</p>
+  </div>
+  <div class="content">
+    <div class="ui equal width form">
+      <div class="field">
+        <label class="formLabel" data-tooltip="Once the proxy finished processing your transaction you can check the state with the bundle hash."
+          data-position="top left" data-variation="mini">
+          <i class="question circle grey icon"></i>Bundle Hash
+        </label>
+
+        <div class="ui small action input">
+          <input id="bundleHashDuplicate" tabindex="-1" class="trytes readonly" readonly="readonly" type="text" maxlength="90">
+          <a id="btnExploreBundleHashDuplicate" class="ui secondary right icon button" target="_blank">
+            <i class="eye icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

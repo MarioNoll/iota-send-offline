@@ -1,0 +1,6 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@coloredBorderSize: 0.15em;
+@background: fade(@white, 50%);
+@border: none;

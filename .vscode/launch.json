@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch iota-send-offline",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "gulp_build_debug",
+            "sourceMaps": false,
+            "file": "${workspaceFolder}/build/debug/index.html"
+        }
+    ]
+}
