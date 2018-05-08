@@ -190,7 +190,7 @@
   function sendTransaction (trytes, bundleHash) {
     $.ajax({
       type: 'post',
-      url: window.twapi + '/bundles',
+      url: window.twapi + '/v1/bundles',
       crossDomain: true,
       contentType: 'application/json',
       data: trytes,

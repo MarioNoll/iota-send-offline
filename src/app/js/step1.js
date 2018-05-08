@@ -116,7 +116,7 @@
     function getProxySchema (balance) {
       $.ajax({
         type: 'post',
-        url: window.twapi + '/tx-schemas',
+        url: window.twapi + '/v1/tx-schemas',
         crossDomain: true,
         dataType: 'json',
         beforeSend: function (jqXHR) {
